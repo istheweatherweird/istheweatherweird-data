@@ -25,6 +25,6 @@ $(GZS):
 	mkdir -p `dirname $@`
 	wget -nv -O www/`basename $@` ftp://ftp.ncdc.noaa.gov/pub/data/gsod/$(@:www/$(STATION)-%.op.gz=%)/$(@:www/%=%)
 
-$(CSVS): $(GZS)
+$(CSVS): $(GZS) gsod2csv.sh
 	# get all files (-type f) not empty (-not -empty) in www
 	./gsod2csv.sh `basename $@ .csv` > $@
